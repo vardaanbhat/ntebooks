@@ -1,0 +1,47 @@
+Kepecs A, van Rossum MC, Song S, and Tegner J. Spike-timingdependent
+plasticity: common themes and divergent vistas - апгрейд STDP
+
+Engert F, Tao HW, Zhang LI, and Poo MM. Moving visual stimuli
+rapidly induce direction sensitivity of developing tectal neurons  - как образуются нейроны последовательностей
+
+Stringer, S. M., Rolls, E. T., Trappenberg, T. P., & De Araujo, I. E. T. (2003).
+Self-organizing continuous attractor networks and motor function.
+
+
+undergo - хорошее слово
+
+Hoffman пишет хорошо вроде про мысли и визуальную информацию
+
+Dobrynia alexdobroff@hotmail.com
+я пишу грант по адаптивным самоусложняющимся системам оптимального управления с реализацией на ИНС
+
+Вайнцвайга, но и Ефима Либермана
+
+в настоящее время в разработке мат-теории ИИ на передний план (насколько я могу судить) вышли три человека:
+ Соломонов, Хаттер и Шмидхубер. Но для того чтобы понимать их статьи нужно хорошо знать теорию алгоритмов 
+и рекурсивных функций. Не знаю есть ли у Вас возможность ее изучить, но поверьте это стоит потраченных усилий
+ - в особенности если Вы работаете в области ИИ.
+
+В работе Д. Уанга и др. [118] предложен пример ее решения с использованием нейронных осцилляторов типа Вилсона-Коуэна - они запоминают последовательности
+и сегментируют их
+
+Brain, Vision, Memory
+Gross C.G. (Ed.) Cambridge: The MIT Press, 1999. 273 p.
+
+Gateway to Memory
+Gluck M.A., Myers C.E. (Eds.) Cambridge: The MIT Press, 2000. 464 p.
+
+Handbook of functional neuroimaging of cognition
+Cabeza R., Kingstone A. Cambridge: The MIT Press, 2001. 412 p.
+
+The Hot Brain
+Gisolfi C.V., Mora F. Cambridge: The MIT Press, 2000. 272 p.
+
+Theoretical Neuroscience
+Dayan P., Abbott L.F. Cambridge: The MIT Press, 2001. 576 p.
+
+
+Prefrontal cortex
+and the flexibility of cognitive control: Rules without
+symbols. Proceedings of the National Academy of Sciences,
+102(20):7338–7343, 2005.
