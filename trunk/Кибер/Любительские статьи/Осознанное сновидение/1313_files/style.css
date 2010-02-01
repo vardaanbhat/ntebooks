@@ -1,0 +1,384 @@
+FONT		{FONT-FAMILY: Arial, sans-serif FONT-SIZE: 12px}
+
+BODY		{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+P		{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+table.null {
+border:0px; 
+border-collapse:collapse;
+}
+
+table.null td {
+padding:0px; 
+} 
+
+table.padd {
+border:0px; 
+border-collapse:collapse;
+}
+
+table.box98 {
+border:0px; 
+border-collapse:collapse;
+width:98%
+}
+
+table.box98 td {
+padding:0px; 
+} 
+
+table.anons {
+BORDER-TOP: #EEEEEE 1px solid;
+BORDER-BOTTOM: #EEEEEE 1px solid;
+BORDER-LEFT: #EEEEEE 1px solid;
+BORDER-RIGHT: #EEEEEE 1px solid;
+MARGIN: 2px 5px 0px 2px;
+border-collapse:collapse;
+}
+
+table.anons td {
+padding:0px; 
+} 
+
+table.anonsimg {
+BORDER-TOP: #EEEEEE 1px solid;
+BORDER-BOTTOM: #EEEEEE 1px solid;
+BORDER-LEFT: #EEEEEE 1px solid;
+BORDER-RIGHT: #EEEEEE 1px solid;
+border-collapse:collapse;
+}
+
+table.anonsimg td {
+padding:0px; 
+} 
+
+TD		{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+H4		{margin-bottom: 0px; margin-top: 0px}
+
+.yell		{COLOR: #FFAA00; margin-bottom: 0px; margin-top: 0px}
+
+.blue	 	{COLOR: #437FDB; margin-bottom: 0px; margin-top: 0px}
+
+.gray	 	{COLOR: #6C6C6D; margin-bottom: 0px; margin-top: 0px}
+
+.hred	 	{COLOR: #FF0000; margin-bottom: 0px; margin-top: 0px}
+
+.lnk	 	{COLOR: #594FBF; margin-bottom: 0px; margin-top: 0px}
+
+.siniy	 	{COLOR: #66669A; margin-bottom: 0px; margin-top: 0px}
+
+INPUT		{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+SELECT   	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+.search INPUT	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt; padding 0px; border: 1px solid #7F9DB9; padding-left: 2px}
+
+.poisk SELECT   {COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 8pt; padding 0px}
+
+.login INPUT	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 7pt; border: 1px solid #7F9DB9}
+
+.login2 FORM	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 8pt; border: 1px solid #7F9DB9; MARGIN-TOP: 0px}
+
+.login3 INPUT	{COLOR: #7F9DB9; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 7pt; border: 0px solid #7F9DB9; MARGIN-TOP: 0px;}
+
+.select SELECT	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 7pt; border: 1px solid #7F9DB9; }
+
+TEXTAREA	{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+
+FORM 		{COLOR: #444444; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 12px; MARGIN-BOTTOM: 2px}
+A:link         	       {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:active               {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:visited              {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+A:hover                {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal;;   TEXT-DECORATION: none}
+.navigator A:link      {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: underline}.navigator A:active    {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: underline}.navigator A:visited   {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: underline}.navigator A:hover     {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: underline}
+.navigred	       {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+
+.qlink 		       {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlink A:link          {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlink A:active        {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlink A:visited       {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlink A:hover         {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlinkS 	        {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.qlinkS A:link          {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}.qlinkS A:active        {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}.qlinkS A:visited       {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}.qlinkS A:hover         {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+.smallink1 A:link       {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 8pt; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.smallink1 A:active     {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 8pt; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.smallink1 A:visited    {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 8pt; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.smallink1 A:hover      {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 8pt; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal;; TEXT-DECORATION: none}
+
+.normal			{COLOR: #444444; FONT-FAMILY: Arial  FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.normal A:link		{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.normal A:active	{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.normal A:visited	{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.normal A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+
+.toplink		{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+.toplink A:link		{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+.toplink A:active       {BACKGROUND: none; COLOR: #444444; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+.toplink A:visited      {BACKGROUND: none; COLOR: #444444; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+.toplink A:hover        {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+.bfont          	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+.bfont A:link         	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+.bfont A:active        	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+.bfont A:visited       	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+.bfont A:hover       	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+
+.bfontnormal          	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.bfontnormal A:link     {BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.bfontnormal A:active   {BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.bfontnormal A:visited  {BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+.bfontnormal A:hover    {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}
+
+.searchtitle		{BACKGROUND: #FFAA00; COLOR: #FFFFFF; FONT-SIZE: 22px; FONT-WEIGHT: bold; FONT-FAMILY: Sance Serif; TEXT-DECORATION: none}
+.searchsubtitle		{BACKGROUND: #FFAA00; COLOR: #437FDB; FONT-SIZE: 17px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+.searchintro		{BACKGROUND: #FFAA00; COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+
+.intro			{BACKGROUND: none; COLOR: #4e4e4e; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}.bfontnormalS          	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: normal; TEXT-DECORATION: none}.titlesearch 	 	{COLOR: #444444; FONT-SIZE: 15px; FONT-FAMILY: Arial, sans-serif}
+.logo 			{COLOR: #FF0000; FONT-SIZE: 30px; FONT-FAMILY: Arial; FONT-WEIGHT: bold; vertical-align: text-top; TEXT-DECORATION: none}.titlesearch A:link 	{COLOR: #594FBF; FONT-SIZE: 16px; FONT-FAMILY: Arial, sans-serif}
+.titlesearch A:active	{COLOR: #594FBF; FONT-SIZE: 16px; FONT-FAMILY: Arial, sans-serif}.titlesearch A:visited	{COLOR: #594FBF; FONT-SIZE: 16px; FONT-FAMILY: Arial, sans-serif}.titlesearch A:hover	{COLOR: #FF0000; FONT-SIZE: 16px; FONT-FAMILY: Arial, sans-serif}.query 	 		{COLOR: #444444; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; BACKGROUND: #FFAA00}.query A:link 		{COLOR: #444444; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; BACKGROUND: #FFAA00}.query A:active		{COLOR: #444444; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; BACKGROUND: #FFAA00}.query A:visited	{COLOR: #444444; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; BACKGROUND: #FFAA00}.query A:hover		{COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; BACKGROUND: #FFAA00}
+.title 		{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 13px; FONT-WEIGHT: bold; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+
+.bluetitle 	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 13px; FONT-WEIGHT: bold; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+
+.content 	{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.content2 		{BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content2 A:link	{BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content2 A:active	{BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content2 A:visited	{BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content2 A:hover 	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+
+.contentred 		{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+
+.content5 		{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content5 A:link	{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content5 A:active	{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content5 A:visited	{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+.content5 A:hover 	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 11px; FONT-FAMILY: Arial, sans-serif}
+
+.titblock 		{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.titblock A:link	{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.titblock A:active	{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.titblock A:visited	{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.titblock A:hover 	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif}
+.forum3			{COLOR: #AAAAAA; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px}
+.forum3 A:link		{COLOR: #AAAAAA; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px}
+.forum3 A:active	{COLOR: #AAAAAA; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px}
+.forum3 A:visited	{COLOR: #AAAAAA; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px}
+.forum3 A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px}
+
+.storytitle 	{BACKGROUND: none; COLOR: #363636; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+
+.tiny		{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 11px; FONT-WEIGHT: normal; FONT-FAMILY: Arial, sans-serif; TEXT-DECORATION: none}
+
+.green		{COLOR: 3f8640; FONT-FAMILY: Arial, sans-serif; FONT-SIZE: 9pt}
+  .tabtop 	{MARGIN: 0px 0px 0px; BORDER-COLOR: #FFFFFF}
+
+.tabtopgray 	{BORDER-top: #CCCCCC 1px solid}
+.tab1 		{BORDER-TOP: #CCCCCC 1px solid; BORDER-LEFT: #CCCCCC 1px solid}
+.tab11 		{BORDER-BOTTOM: #CCCCCC 1px solid; BORDER-RIGHT: #CCCCCC 1px solid}
+.tab2 		{BORDER-LEFT: #CCCCCC 1px solid; MARGIN: 0px 0px 5px}
+.taballred  	{BORDER: #FF0000 1px solid; MARGIN: 0px 0px 0px 0px}
+
+.tabbotgray  	{BORDER-BOTTOM: #CCCCCC 1px solid; MARGIN: 0px 0px 3px}
+
+.allbordgray 	{
+BORDER-TOP: #CCCCCC 1px solid;
+BORDER-BOTTOM: #CCCCCC 1px solid;
+BORDER-LEFT: #CCCCCC 1px solid;
+BORDER-RIGHT: #CCCCCC 1px solid;
+}
+
+.red		{COLOR: FF0000; FONT-FAMILY: Arial; FONT-SIZE: 13px}
+.bigred		{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 17px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.big1red	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+.big2red	{BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 19px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.middlegray	{BACKGROUND: none; COLOR: #444444; FONT-SIZE: 13px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.bigblue	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 22px; FONT-WEIGHT: bold; FONT-FAMILY: Sance Serif; TEXT-DECORATION: none}
+
+.bigmetal1	{BACKGROUND: none; COLOR: #6C6C6D; FONT-SIZE: 17px; FONT-WEIGHT: bold; FONT-FAMILY: Sance Serif; TEXT-DECORATION: none}
+
+.afont  	{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 12px; FONT-WEIGHT: normal; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.afontbig  	{BACKGROUND: none; COLOR: #AAAAAA; FONT-SIZE: 12pt; FONT-WEIGHT: normal; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.big1blue	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.big1yl		{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 14px; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+
+.bigblue2	{BACKGROUND: none; COLOR: #437FDB; FONT-SIZE: 17px; FONT-WEIGHT: bold; FONT-FAMILY: Arial; TEXT-DECORATION: none}
+.pagen		{COLOR: #DDDDDD; FONT-FAMILY: Arial, Sance Serif; FONT-SIZE: 9px; MARGIN-BOTTOM: 6px}
+
+.brfont 	{font-family: Arial, sans-serif; font-size: 9pt; font-style: normal; line-height: normal; font-weight: bold; color: #FFAA00}
+
+.brfontbig1 	{font-family: Arial, sans-serif; font-size: 12pt; font-style: normal; line-height: normal; font-weight: bold; color: #FFAA00}
+
+.brfontbig2	{BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 22px; FONT-WEIGHT: bold; FONT-FAMILY: Sance Serif; TEXT-DECORATION: none}
+
+.greenfont 	{font-family: Arial, sans-serif; font-size: 9pt; font-weight: bold; color: #B8B83C}
+
+.seagreenfont	{font-family: Arial, sans-serif; font-size: 9pt; font-weight: bold; color: #52A476}
+
+.ffont          {BACKGROUND: none; COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+
+.redfont        {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+.linkbot        {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 9px; FONT-FAMILY: COMIC SANS MS,ARIAL; TEXT-DECORATION: none}
+
+.linkbotred     {BACKGROUND: none; COLOR: #FF0000; FONT-SIZE: 9px; FONT-FAMILY: COMIC SANS MS,ARIAL; TEXT-DECORATION: none}
+
+.linkbotyell    {BACKGROUND: none; COLOR: #FFAA00; FONT-SIZE: 9px; FONT-FAMILY: COMIC SANS MS,ARIAL; TEXT-DECORATION: none}
+
+.linkbotblue    {BACKGROUND: none; COLOR: #003399; FONT-SIZE: 9px; FONT-FAMILY: COMIC SANS MS,ARIAL; TEXT-DECORATION: none}
+
+.titstory       {BACKGROUND: none; COLOR: #594FBF; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold; TEXT-DECORATION: none}
+
+.metal           {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px; FONT-WEIGHT: bold}
+.metal A:link	 {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px; FONT-WEIGHT: bold}
+.metal A:active	 {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px; FONT-WEIGHT: bold}
+.metal A:visited {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px; FONT-WEIGHT: bold}
+.metal A:hover 	 {COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 12px; FONT-WEIGHT: bold}
+
+.bigmetal       {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 14px; FONT-WEIGHT: bold}
+
+.metalslash     {COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 9px; FONT-WEIGHT: bold}
+
+.metalsmall 		{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.metalsmall A:link	{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.metalsmall A:active	{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.metalsmall A:visited	{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.metalsmall A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.graysmall 		{COLOR: #AAAAAA; FONT-FAMILY: Arial; FONT-SIZE: 11px}.graysmall A:link	{COLOR: #AAAAAA; FONT-FAMILY: Arial; FONT-SIZE: 11px}.graysmall A:active	{COLOR: #AAAAAA; FONT-FAMILY: Arial; FONT-SIZE: 11px}.graysmall A:visited	{COLOR: #AAAAAA; FONT-FAMILY: Arial; FONT-SIZE: 11px}.graysmall A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.metal2	 		{COLOR: #6C6C6D; FONT-FAMILY: Arial, FONT-SIZE: 12px}
+.metal2 A:link		{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px}
+.metal2 A:active	{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px}
+.metal2 A:visited	{COLOR: #6C6C6D; FONT-FAMILY: Arial; FONT-SIZE: 12px}
+.metal2 A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 12px}
+.rebesit	        {COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit A:link		{COLOR: #594FBF; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit A:active	{COLOR: #594FBF; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit A:visited	{COLOR: #594FBF; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+
+.rebesit1	        {COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit1 A:link	{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit1 A:active	{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit1 A:visited	{COLOR: #444444; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+.rebesit1 A:hover 	{COLOR: #FF0000; FONT-FAMILY: Arial; FONT-SIZE: 11px}
+
+.grayline {border-top: 1px solid #CCCCCC;}
+
+.linkblock {margin-top: 2px; margin-bottom: 3px;}
+
+.tabbordwhite   {border: 1px solid #FFFFFF}
+
+.marg1			{MARGIN-TOP: 1px}
+.marg2			{MARGIN-TOP: 2px}
+.marg3			{MARGIN-TOP: 3px}
+.marg4			{MARGIN-TOP: 4px}
+.marg5			{MARGIN-TOP: 5px}
+.marg6			{MARGIN-TOP: 6px}
+.marg7			{MARGIN-TOP: 7px}
+.marg8			{MARGIN-TOP: 8px}
+.marg9			{MARGIN-TOP: 9px}
+.marg10			{MARGIN-TOP: 10px}
+.marg11			{MARGIN-TOP: 11px}
+.marg12			{MARGIN-TOP: 12px}
+.marg13			{MARGIN-TOP: 13px}
+.marg14			{MARGIN-TOP: 14px}
+
+
+.dotline952 {
+Width: 952;
+Height: 1px;
+background-image: url(/images/dotgray.gif);
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+border: none;
+}
+
+.ModBox {
+margin: 0px 0px 0px 0px;
+padding: 0px 5px 0px 5px;
+vertical-align: top;
+}
+
+.BoxBegun {
+width: 740px;
+text-align: right;
+}
+
+.BoxBegun640 {
+width: 640px;
+text-align: right;
+}
+
+.fontwhite {font-family: Arial, sans-serif; font-size: 9pt; font-style: normal; font-weight: normal; color: #FFFFFF}
+
+table.border{
+border-color: #FFFFFF;
+border-style: solid;
+border-width: 0 2px 2px 0
+}
+
+table.border td {
+border-color: #FFFFFF;
+border-style: solid;
+border-width: 2px 0 0 2px
+}
+
+.div98 {
+  width: 98%;
+  margin: 0px 0px 0px 0px;
+}
+
+#lblcont {
+  width: 153px;
+  margin-top: 0;
+  margin-right: 5;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+#rblcont200 {
+  width: 200px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+td.pr_td A:link          {COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+td.pr_td A:active        {COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+td.pr_td A:visited       {COLOR: #66669A; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+td.pr_td A:hover         {COLOR: #FF0000; FONT-SIZE: 12px; FONT-FAMILY: Arial, sans-serif; FONT-WEIGHT: bold}
+
+td.pr_td {
+COLOR: #444444; 
+FONT-FAMILY: Arial, sans-serif; 
+FONT-SIZE: 8pt;
+text-align: right;
+padding-bottom: 7px
+} 
+
+.quote {
+Width: 80%;
+display: inline;
+vertical-align: top;
+COLOR: #444444; 
+FONT-SIZE: 12px; 
+FONT-FAMILY: Arial, sans-serif;
+}
+
+.subcomment {
+width: 92%;
+COLOR: #444444; 
+float: right;
+FONT-SIZE: 12px; 
+FONT-FAMILY: Arial, sans-serif;
+MARGIN: 10px 5px 10px 5px;
+PADDING: 7px 7px 7px 7px;
+border-collapse:collapse;
+}
