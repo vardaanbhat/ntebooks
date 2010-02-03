@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><!-- GameDev.ru / Статьи / Engine / Двумерный движок физики многоугольников и окружностей на основе метода импульсов. --><title>Двумерный движок физики многоугольников и окружностей на основе метода импульсов. / Engine / Статьи / GameDev.ru</title>
+
+
+
+ 
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ <meta http-equiv="Content-Language" content="ru">
+ <meta name="Description" content="Двумерный движок физики многоугольников и окружностей на основе метода импульсов.">
+ <meta name="keywords" content="Двумерный, движок, физики, многоугольников, окружностей, на, основе, метода, импульсов">
+ <link href="http://www.gamedev.ru/favicon.ico" rel="SHORTCUT ICON"> 
+ <link href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru2_files/style4.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru2_files/common.js"></script>
+<link rel="stylesheet" type="text/css" href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru2_files/article.css"></head><body>
+
+<!-- User Panel -->
+<form action="/users/logon.php" method="post" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left"><b>GameDev.ru — Разработка игр.</b>
+</p></td>
+<td class="code">
+<p class="non" align="center"><a href="http://www.gamedev.ru/project/">В первый раз на сайте?</a>
+</p></td>
+<td class="code">
+<p class="non" align="right">
+<input name="action" value="logon" type="hidden">
+<a href="http://www.gamedev.ru/users/regist.php" title="Зарегистрироваться">Логин</a>:<input class="thinbut" name="Nick" value="" size="10">
+<a href="http://www.gamedev.ru/users/passrem.php" title="Напоминание пароля">Пароль</a>:<input class="thinbut" name="Password" value="" size="10" type="password">
+<input class="thinbut" value="Войти" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+<table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td>
+<p class="non" style="font-family: impact,sans-serif; font-size: 46px; font-weight: bold;">
+<i><a style="text-decoration: none;" href="http://www.gamedev.ru/">GameDev.ru </a></i>
+</p></td>
+<td><p class="non" align="right">
+</p></td>
+</tr></tbody></table>
+
+<!-- Path -->
+<form method="get" action="http://www.google.com/search" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left">
+/ <a href="http://www.gamedev.ru/" title="GameDev.ru - Разработка игр">GameDev</a> / <a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a> / <a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a> / <b>Двумерный движок физики многоугольников и окружностей на …</b></p></td>
+<td class="code"><p align="right">
+Поиск:<input name="ie" value="windows-1251" type="hidden"><input name="oe" value="windows-1251" type="hidden"><input name="domains" value="www.gamedev.ru" type="hidden"><input class="thinbut" name="q" size="10" maxlength="255" value="" type="text"><input name="sitesearch" value="www.gamedev.ru" checked="checked" type="hidden">
+<input class="thinbut" name="btnG" value="Найти!" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td>
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+<tbody><tr><td valign="top" width="110">
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+
+
+<!-- Menu -->
+<tbody><tr><td>
+<table class="r" cellpadding="1" cellspacing="1" width="100%">
+<tbody><tr><td class="menu"><a href="http://www.gamedev.ru/news/" title="Новости">Новости</a></td></tr><tr><td class="code"><b><a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a></b></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/authors.shtml" title="Авторам">Авторам</a></p></td></tr><tr><td class="code"><p class="non">| <a href="" title=""></a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=1" title="Direct3D">Direct3D</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=2" title="OpenGL">OpenGL</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=3" title="Графика">Графика</a></p></td></tr><tr><td class="co"><p class="non">&gt; <b><a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a></b></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=4" title="Экспорт">Экспорт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=8" title="Сети">Сети</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=10" title="Звук">Звук</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=11" title="DelphiX">DelphiX</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=5" title="Game Design">Game Design</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=6" title="Арт">Арт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=9" title="Интервью">Интервью</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=12" title="События">События</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=13" title="Работа">Работа</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=14" title="Юмор">Юмор</a></p></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/tip/" title="Подсказки">Подсказки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/terms/" title="Термины">Термины</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/faq/" title="FAQ">FAQ</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/forum/" title="Форум">Форум</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/community/" title="Сообщества">Сообщества</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/links/" title="Ссылки">Ссылки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/books/" title="Книги">Книги</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/job/forum/" title="Работа">Работа</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/proj/" title="Проекты">Проекты</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/users/" title="Пользователи">Пользователи</a></td></tr></tbody></table></td></tr><tr><td><br><table class="r" cellpadding="3" cellspacing="1" width="100%"><tbody><tr><td class="menu">
+<p class="non">Рекомендуем
+</p></td></tr><tr><td class="code">
+<p class="non" align="center"><noindex><a href="http://www.ozon.ru/context/detail/id/1633721/?partner=game"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru2_files/1000118366.gif" alt="Графика трехмерной компьютерной игры на основе OpenGL" border="0" width="60"></a></noindex><br>
+<noindex><a href="http://www.ozon.ru/context/detail/id/1633721/?partner=game">Заказать</a></noindex><br>
+</p></td></tr></tbody></table></td></tr></tbody></table>
+</td>
+<td class="fon" valign="top">
+<table border="0" cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td>
+<!-- Господь! Ты видишь это тело! -->
+
+</td></tr><tr><td class="title"><h1>Двумерный движок физики многоугольников и окружностей на основе метода импульсов.</h1></td></tr><tr><td>
+<p class="non">Страницы: <i><b><a href="http://www.gamedev.ru/articles/?id=70124">1</a> 2 <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">3</a> </b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">Следующая страница</a></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p><p>
+<table align="right" border="0" cellpadding="10" cellspacing="0" width="200"><tbody><tr><td>
+<p class="non" align="right">
+
+</p><p class="non">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td class="title">
+<table border="0" cellpadding="10" cellspacing="1" width="100%"><tbody><tr><td class="fon">
+
+<b>
+</b><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124">Введение</a></b></p><p class="non" align="right"><b>Часть 2. Разбиение пространства, пересечение фигур</b></p><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">Часть 5. Удары и импульсы</a></b></p></td></tr></tbody></table></td></tr></tbody></table>
+</p></td></tr></tbody></table>
+	</p><p align="left"><b class="title">Часть 2. Разбиение пространства, пересечение фигур</b></p><p>В
+нашем движке будут два вида фигур: окружности и выпуклые
+многоугольники. Движимое тело будет состоять из одной или большего
+количества таких фигур. С каждым телом связаны координаты его центра
+(x, y) (который у нас фактически есть центр масс) и угол поворота тела:
+angle. Поместим тело в (0,0) и угол поворота = 0. Теперь запомним
+координаты вершин многоугольника (для многоугольников тела) и
+координаты центров окружностей (для окружностей тела). Запомнив, сможем
+переместить все фигуры вслед за телом в любую точку на любой угол
+поворота. Как? Ну, просто перемещение тела в (x, y), элементарно —
+добавляем к запомненным координатам (x, y). Если нужен поворот — перед
+перемещением поворачиваем запомненные координаты вокруг (0,0) на нужный
+угол (то есть на angle).
+</p><p>Для особо непонятливых: необходимо хранить исходную позицию
+фигур (для положения (0,0), angle = 0) и текущую. С текущей работать, а
+когда потребуется передвинуть фигуры вслед за телом — использовать
+исходную для обновления текущей позиции. То есть текущая позиция нам
+никак не помогает в получении очередной текущей позиции. Ясное дело,
+что основной труд — это перемещение вершин многоугольника, потому как у
+окружности требуется перемещать всего одну точку — ее центр.
+</p><p>Для того чтобы быстрее определять пересечения между телами,
+разобьем плоскость на квадраты, то есть на хеш-ячейки. Поскольку
+плоскость бесконечна (ну обычно ;), то разобьем на квадраты не всю
+плоскость, а некоторый прямоугольник нашего игрового поля, а все
+остальное отнесем к отдельной особой хеш-ячейке. Размер ячейки
+разбиения — квадрата — не должен быть меньше двойного максимального
+радиуса тела. Теперь рассуждаем, каждое тело в своей текущей позиции
+принадлежит какому-то одному квадрату. При этом, размер квадрата
+подобран так, чтобы тело может максимально пересекать собой окружающие
+этот квадрат cоседей-квадратов (их будет 8). То есть все остальные
+квадраты нас не интересуют (точнее тела, лежащие в этих квадратах).
+Таким вот образом, двумерное хеширование позволяет быстро отсечь
+ненужные фигуры из алгоритма пересечения. Дальше — дело техники: надо
+искать пересечения с телами в текущем квадрате + в его соседях + в
+особом списке (помните про особый? — все, что вне игрового поля, сюда
+же можно заносить большие фигуры, которые не помещаются в одной
+ячейке). Ну, и не забывать при перемещении тела по полю, перекладывать
+его в список хеш-квадрата, соответствующего новой позиции тел.
+</p><p>Пересечение тел — это попытка найти пересечения между всеми
+фигурами тел. Возможны три алгоритмически разных случая:
+окружность-окружность, окружность-многоугольник, многоугольник-
+многоугольник. Однако, прежде чем использовать сложные алгоритмы
+пересечений, имеет смысл ввести оптимизационные проверки. </p><p>1.&nbsp; пересечение описывающих квадратов (one, two —
+пересекаемые фигуры, (xc, yc) — центры описанной окружности радиуса R
+этих фигур):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>  <b>if</b> (one-&gt;xc - one-&gt;R &gt; two-&gt;xc + two-&gt;R) <b>return</b> <b>false</b>;
+  <b>if</b> (two-&gt;xc - two-&gt;R &gt; one-&gt;xc + one-&gt;R) <b>return</b> <b>false</b>;
+  <b>if</b> (one-&gt;yc - one-&gt;R &gt; two-&gt;yc + two-&gt;R) <b>return</b> <b>false</b>;
+  <b>if</b> (two-&gt;yc - two-&gt;R &gt; one-&gt;yc + one-&gt;R) <b>return</b> <b>false</b>;</pre></td></tr></tbody></table></div>
+<p>2.&nbsp; пересечение описывающих окружностей:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>  <b>double</b> dx = one-&gt;xc - two-&gt;xc;
+  <b>double</b> dy = one-&gt;yc - two-&gt;yc;
+  <b>double</b> d = one-&gt;R + two-&gt;R;
+
+  <b>if</b> (dx * dx + dy * dy &gt; d * d) <b>return</b> <b>false</b>;</pre></td></tr></tbody></table></div>
+<p>Вот теперь уже надо применять сложные методы для выявления случая
+пересечения окружность-многоугольниник и
+многоугольниник-многоугольниник. </p><p>Для двух многоугольников надо построить многоугольник,
+являющийся их пересечением. То есть «рассечь» сторонами одного
+многоугольника другой. Если есть непустой многоугольник пересечения, то
+исходные многоугольники пересекаются.
+</p><p>Случай окружность-многоугольник решается обходом сторон и
+вершин многоугольника с проверкой на пересечение с окружностью. Все
+нужные функции я уже привел.
+</p><p><b class="title">Часть 3. Движение тела.</b>
+</p><p>Для того, чтобы охарактеризовать движущееся тело нам необходимо для тела задать:
+<br></p><p class="non" align="left">V = (Vx, Vy) — вектор скорости (линейной, то есть скорости движения тела по полю)
+<br>W — угловая скорость (то есть скорость вращения тела вокруг центра).
+</p><p>Несколько физических постулатов. Тело массой M движется как
+материальная точка массой M, совпадающая с центром масс тела. Форма
+тела здесь не имеет значения. К этому движению (так называемому,
+плоскому) добавляется вращение тела вокруг своего центра масс (это
+вращение никак не влияет на плоское движение и обратно). Опять-таки,
+форма тела не важна, важен только момент инерции. В отсутствие внешних
+сил линейная и угловая скорость тела не меняются, то есть тело
+продолжает двигаться (или стоять на месте) и вращаться. Как узнать,
+куда оно уехало (укрутилось) за период времени dt? Элементарно!
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>void</b> update_position(<b>double</b> dt)
+{
+  x += Vx * dt; y += Vy * dt; angle += W * dt;
+}</pre></td></tr></tbody></table></div>
+<p>Вот, собственно и все по поводу движения.
+</p><p><b class="title">Часть 4. Силы, действующие на тело.</b>
+</p><p>Для того чтобы работать с силами телу придется еще задать:
+</p><p>M — массу, то есть сопротивляемость тела к движению.
+<br>I — момент инерции, то есть сопротивляемость тела к вращению.
+</p><p>Масса плоского тела обычно зависит от R * R. Момент инерции
+плоского круга радиуса R и массой M (равномерно распределенной по
+кругу) есть I = 0.5 * M * R * R. <br>То есть, если вы не знаете какую же в M и I цифру записать,
+делайте так: M = R * R; I = 0.5 * M * R * R. Если тело на ваш взгляд
+закручивается слишком легко — увеличивайте момент инерции, слишком
+тяжело сдвигается — уменьшайте массу и т.д. </p><p>Основная формула действия силы F (F — это вектор!) на тело массой M: 
+</p><p><b>dV = F/M * dt,</b>
+</p><p>где dV (dV — это тоже, разумеется, вектор) есть изменение
+скорости тела массой M за период dt под действием силы (постоянной в
+период dt).
+</p><p>Закручивающие силы действуют так же. Предположим, на наше тело
+действует толкающая сила F = (Fx, Fy) и закручивающая сила H (скаляр).
+Мы последовательно заходим в нашу процедуру движения тела с периодом
+dt. Как будет обновляться позиция тела? Примерно так:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>void</b> update_speed(<b>double</b> dt)
+{
+  Vx += Fx / M * dt; Vy += Fy / M * dt; W += H / I * dt;
+}
+
+<b>void</b> Tick(<b>double</b> dt)
+{
+  update_position (dt);
+  update_speed(dt);
+}</pre></td></tr></tbody></table></div>
+<p>А теперь интересный момент — силы-то складываются! То есть если у
+нас есть несколько сил толкающих, то складываем их и то же для крутящих
+сил. И теперь используем Tick(), в который передаем суммарную силу. И
+результат будет такой, как если бы мы учитывали каждую силу в
+отдельности.
+</p><p>Выше мы проделали (весьма грубо) операцию интегрирования. При
+этом я предполагал, что на малом временном промежутке dt силы
+неизменны. Вообще говоря, это предположение не такое уж и тяжелое — для
+вашей игровой модели его может вполне хватить. Однако, если силы сильно
+меняются и вы хотите использовать более точные подсчеты — ищите сами
+метод Рунге-Кутта и изучайте формулу Тейлора.</p><p class="non">Страницы: <i><b><a href="http://www.gamedev.ru/articles/?id=70124">1</a> 2 <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">3</a> </b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">Следующая страница</a></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p></td></tr><tr><td><p class="non"><a href="http://www.gamedev.ru/forum/?group=2&amp;topic=855">Комментарии: -1</a><br><a href="http://www.gamedev.ru/articles/print.shtml?id=70124">Версия для печати</a></p><p><b class="title">Статьи по теме на GameDev.ru:</b><br>1. <b><a href="http://www.gamedev.ru/articles/?id=70126">Rag doll.</a></b><br>2. <b><a href="http://www.gamedev.ru/articles/?id=70125">Введение в физическую библиотеку Tokamak</a></b><br>3. <b><a href="http://www.gamedev.ru/articles/?id=70108">Физика автомобиля для игр.</a></b><br>
+
+<!-- Ниже - только жопа -->
+</p></td></tr></tbody></table>
+</td>
+</tr></tbody></table></td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p align="center">
+<a href="http://www.gamedev.ru/users/enter.php">Войти в систему</a> | <a href="http://www.gamedev.ru/project/">О сайте</a>
+| <a href="http://www.gamedev.ru/articles/authors.shtml">Авторам</a>
+| <a href="http://www.gamedev.ru/site/forum/">Обсудить</a>
+</p></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td>
+<p align="center"><br>©2001—2008 «GameDev.ru»
+<br><!--Rating@Mail.ru COUNTER--><script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script><script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=261892"'+
+' target=_top><img src="http://top.list.ru/counter'+
+'?id=261892;t=84;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=18 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=261892" target="_top"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru2_files/counter.gif" alt="Рейтинг@Mail.ru" border="0" height="18" width="88"></a><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=261892"><img
+src="http://top.list.ru/counter?js=na;id=261892;t=84"
+border=0 height=18 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->
+
+</p></td></tr></tbody></table>
+<!-- Это конец! --></body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><!-- GameDev.ru / Статьи / Engine / Двумерный движок физики многоугольников и окружностей на основе метода импульсов. --><title>Двумерный движок физики многоугольников и окружностей на основе метода импульсов. / Engine / Статьи / GameDev.ru</title>
+
+
+
+ 
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ <meta http-equiv="Content-Language" content="ru">
+ <meta name="Description" content="Двумерный движок физики многоугольников и окружностей на основе метода импульсов.">
+ <meta name="keywords" content="Двумерный, движок, физики, многоугольников, окружностей, на, основе, метода, импульсов">
+ <link href="http://www.gamedev.ru/favicon.ico" rel="SHORTCUT ICON"> 
+ <link href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru3_files/style4.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru3_files/common.js"></script>
+<link rel="stylesheet" type="text/css" href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru3_files/article.css"></head><body>
+
+<!-- User Panel -->
+<form action="/users/logon.php" method="post" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left"><b>GameDev.ru — Разработка игр.</b>
+</p></td>
+<td class="code">
+<p class="non" align="center"><a href="http://www.gamedev.ru/project/">В первый раз на сайте?</a>
+</p></td>
+<td class="code">
+<p class="non" align="right">
+<input name="action" value="logon" type="hidden">
+<a href="http://www.gamedev.ru/users/regist.php" title="Зарегистрироваться">Логин</a>:<input class="thinbut" name="Nick" value="" size="10">
+<a href="http://www.gamedev.ru/users/passrem.php" title="Напоминание пароля">Пароль</a>:<input class="thinbut" name="Password" value="" size="10" type="password">
+<input class="thinbut" value="Войти" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+<table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td>
+<p class="non" style="font-family: impact,sans-serif; font-size: 46px; font-weight: bold;">
+<i><a style="text-decoration: none;" href="http://www.gamedev.ru/">GameDev.ru </a></i>
+</p></td>
+<td><p class="non" align="right">
+</p></td>
+</tr></tbody></table>
+
+<!-- Path -->
+<form method="get" action="http://www.google.com/search" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left">
+/ <a href="http://www.gamedev.ru/" title="GameDev.ru - Разработка игр">GameDev</a> / <a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a> / <a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a> / <b>Двумерный движок физики многоугольников и окружностей на …</b></p></td>
+<td class="code"><p align="right">
+Поиск:<input name="ie" value="windows-1251" type="hidden"><input name="oe" value="windows-1251" type="hidden"><input name="domains" value="www.gamedev.ru" type="hidden"><input class="thinbut" name="q" size="10" maxlength="255" value="" type="text"><input name="sitesearch" value="www.gamedev.ru" checked="checked" type="hidden">
+<input class="thinbut" name="btnG" value="Найти!" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td>
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+<tbody><tr><td valign="top" width="110">
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+
+
+<!-- Menu -->
+<tbody><tr><td>
+<table class="r" cellpadding="1" cellspacing="1" width="100%">
+<tbody><tr><td class="menu"><a href="http://www.gamedev.ru/news/" title="Новости">Новости</a></td></tr><tr><td class="code"><b><a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a></b></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/authors.shtml" title="Авторам">Авторам</a></p></td></tr><tr><td class="code"><p class="non">| <a href="" title=""></a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=1" title="Direct3D">Direct3D</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=2" title="OpenGL">OpenGL</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=3" title="Графика">Графика</a></p></td></tr><tr><td class="co"><p class="non">&gt; <b><a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a></b></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=4" title="Экспорт">Экспорт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=8" title="Сети">Сети</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=10" title="Звук">Звук</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=11" title="DelphiX">DelphiX</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=5" title="Game Design">Game Design</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=6" title="Арт">Арт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=9" title="Интервью">Интервью</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=12" title="События">События</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=13" title="Работа">Работа</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=14" title="Юмор">Юмор</a></p></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/tip/" title="Подсказки">Подсказки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/terms/" title="Термины">Термины</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/faq/" title="FAQ">FAQ</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/forum/" title="Форум">Форум</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/community/" title="Сообщества">Сообщества</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/links/" title="Ссылки">Ссылки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/books/" title="Книги">Книги</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/job/forum/" title="Работа">Работа</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/proj/" title="Проекты">Проекты</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/users/" title="Пользователи">Пользователи</a></td></tr></tbody></table></td></tr><tr><td><br><table class="r" cellpadding="3" cellspacing="1" width="100%"><tbody><tr><td class="menu">
+<p class="non">Рекомендуем
+</p></td></tr><tr><td class="code">
+<p class="non" align="center"><noindex><a href="http://www.ozon.ru/context/detail/id/3132093/?partner=game"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru3_files/1000469610.gif" alt="S.T.A.L.K.E.R." border="0" width="60"></a></noindex><br>
+<noindex><a href="http://www.ozon.ru/context/detail/id/3132093/?partner=game">Заказать</a></noindex><br>
+</p></td></tr></tbody></table></td></tr></tbody></table>
+</td>
+<td class="fon" valign="top">
+<table border="0" cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td>
+<!-- Господь! Ты видишь это тело! -->
+
+</td></tr><tr><td class="title"><h1>Двумерный движок физики многоугольников и окружностей на основе метода импульсов.</h1></td></tr><tr><td>
+<p class="non">Страницы: <i><b><a href="http://www.gamedev.ru/articles/?id=70124">1</a> <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">2</a> 3 </b></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p><p>
+<table align="right" border="0" cellpadding="10" cellspacing="0" width="200"><tbody><tr><td>
+<p class="non" align="right">
+
+</p><p class="non">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td class="title">
+<table border="0" cellpadding="10" cellspacing="1" width="100%"><tbody><tr><td class="fon">
+
+<b>
+</b><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124">Введение</a></b></p><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">Часть 2. Разбиение пространства, пересечение фигур</a></b></p><p class="non" align="right"><b>Часть 5. Удары и импульсы</b></p></td></tr></tbody></table></td></tr></tbody></table>
+</p></td></tr></tbody></table>
+	</p><p align="left"><b class="title">Часть 5. Удары и импульсы</b></p><p>Импульсный
+метод подразумевает, что при взаимодействии тел (то есть при ударе) на
+тела действует одинаковый импульс, но с разным знаком по нормали
+контакта удара. Проще показать, как это выглядит математически (antiM =
+1/M, antiI = 1/I, (mass_x, mass_y) — координаты центра масс тела, (x,
+y) — точка, к которой прикладывается импульс impulse по нормали normal;
+movement — это объект, который управляет движением тела):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>void</b> BODY::apply_impulse(<b>double</b> x, <b>double</b> y, DOT2D normal, <b>double</b> impulse)
+{
+  DOT2D RA(x - mass_x, y - mass_y);
+  movement-&gt;V.x += impulse * normal.x * movement-&gt;antiM;
+  movement-&gt;V.y += impulse * normal.y * movement-&gt;antiM;
+  movement-&gt;W += impulse * (normal.y * RA.x - normal.x * RA.y) * movement-&gt;antiI;
+}</pre></td></tr></tbody></table></div>
+<p>Указанный выше метод прикладывает импульс к телу. Внимательно
+изучите этот код. Это основа метода импульсов. Расшифровать его можно
+примерно так: импульс действует на тело как сила, но только уже
+помноженная на некий временной интервал. Импульс изменяет скорость
+тела, тело сопротивляется массой M. И импульс закручивает тело — это
+самая хитрая часть. Давайте разберемся с последней строкой этого
+метода. В ней показано, что на тело действует закручивающая сила, тело
+сопротивляется моментом инерции и есть еще некий множитель:
+<br></p><pre>(normal.y * RA.x - normal.x * RA.y)</pre>
+<p>Это плечо приложения силы. Домашнее задание: попробуйте понять
+геометрически, что такое плечо. Подсказка — чем оно больше, тем сильнее
+один и тот же импульс будет закручивать тело.
+</p><p>Очень важно. Импульс — всегда положителен или равен 0. Если
+импульс меньше 0, то тела разлетаются по контакту. Если вы примените
+отрицательный импульс, возникнет эффект «притяжения» тел по контакту.
+Может у вас такое и будет возможно (для гравитационной пушки как в HL2
+:)?.. </p><p>Что происходит при ударе двух тел? На первое тело (точнее на
+то, на которое направлена нормаль контакта) действует импульс impulse,
+а на второе (то есть на тело, которому принадлежит нормаль контакта)
+действует импульс – impulse:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre> 
+body_1-&gt;apply_impulse(x,y,normal, impulse);
+body_2-&gt;apply_impulse(x,y,normal, -impulse);</pre></td></tr></tbody></table></div>
+<p>Еще раз: нормаль направлена к телу 1 от тела 2. Вот собственно и все
+:-). Шучу. Мы уже знаем, как применить произвольный импульс к
+произвольной точке тела. (Кстати, точка эта не обязана принадлежать
+телу.) С помощью этого метода уже можно написать код, который «таскает
+тела». Осталась мелочь: как же вычислить значение импульса impulse
+произвольного удара между телами? Введем еще одну величину: E. Это
+изменение относительной скорости точек контакта тел (по нормали). То
+есть:
+<br></p><pre>Vab_после_удара = –E * Vab_до удара, </pre>
+<p>Vab — относительная скорость точек контакта тел по нормали (не
+центров масс! А именно тех краевых точек тел, по котором происходит
+контакт.). </p><p>Рассмотрим отдельные значения E. Если E = 0, то точки контакта
+тел после удара двигаются одинаково. Это выглядит так — тела слипаются
+и движутся далее вместе (по нормали контакта, разумеется!). Если E = 1,
+то точки контакта тел после удара разлетаются с такой скоростью, с
+какой слетались. Это пример упругого соударения — так соударяются,
+скажем, бильярдные шары (ну, обычно ;) ). Если E = 0.5, то это то, что
+нам нужно — тела разлетаются примерно так, как если бы были сделаны из
+пластика. <br>Случай E = –1 будем рассматривать? :) Он означает, что
+относительная скорость точек контакта не изменилась, то есть тела
+просто пролетают друг через друга. Имеет также смысл рассмотреть случай
+E = –0.5: относительная скорость пролета тел «сквозь» контакт
+уменьшается вдвое.
+</p><p>Контакт это тот же самый удар, только с E = 0.0 (или с –0.5 — попробуйте, даже лучше «устаканивается»)
+</p><p>Пусть P — точка контакта, R1 и R2 — вектора из центра масс тела
+1 и 2 (нормаль направлена от 2 к 1) в точку контакта (mass_x, mass_y —
+центр масс).
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>R1.x = P.x - body1-&gt;mass_x;
+R1.y = P.y - body1-&gt;mass_y;</pre></td></tr></tbody></table></div>
+<p>Относительная скорость точек тел по контакту (m1 — объект движения тела 1, m2 — объект движения тела 2)
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> Vab()
+{
+    <b>return</b>
+      normal.x * (m1-&gt;V.x - m1-&gt;W * R1.y - m2-&gt;V.x + m2-&gt;W * R2.y) + 
+      normal.y * (m1-&gt;V.y + m1-&gt;W * R1.x - m2-&gt;V.y - m2-&gt;W * R2.x);
+}</pre></td></tr></tbody></table></div>
+<p>Плечи контакта — Z1, Z2:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>Z1 = (normal.y * R1.x - normal.x * R1.y) * m1-&gt;antiI;</pre></td></tr></tbody></table></div>
+<p>Вспомогательная величина:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>J = normal.x *  (normal.x * m1-&gt;antiM - R1.y * Z1 + normal.x * m2-&gt;antiM + R2.y * Z2) 
++ normal.y * (normal.y * m1-&gt;antiM + R1.x * Z1 * m1-&gt;antiI
++ normal.y * m2-&gt;antiM - R2.x * Z2 * m2-&gt;antiI);</pre></td></tr></tbody></table></div>
+<p>Итак, мы готовы выписать формулу расчета импульса:
+<br></p><pre>impulse = ( MIN_V - (1 + E) * Vab() ) / J;</pre>
+<p>Что такое MIN_V — см. ниже, пока считаем его равным нулю.
+</p><p>Повторюсь еще раз. Пусть мы вычислили импульс, а он меньше нуля.
+Что же делать? Да ничего! Нет контакта или удара, а притягиваться телам
+— запрещено законом Ома! ;-)
+</p><p><b class="title">Часть 6. Как это все работает.</b>
+</p><p>Работает это все примерно так: движок вызывают и передают ему
+период времени dt, в течение которого движок ничего не делал. Шаг dt
+подбирается с помощью бубна и медитаций. Если он будет слишком большой
+— забудьте об «устаканивании», тела будут все время подрагивать. Если
+слишком малый — забудьте о производительности. Если прошедший интервал
+времени больше dt, что надо сделать? Правильно вызвать движок несколько
+раз с шагом &lt;= dt.
+</p><p>В движке за время dt делаем:
+<br> 
+<br>— вычисляем силы, действующие на тела в течение dt и применяем их
+<br>— решаем контакты и трение (см. далее)
+<br>— двигаем тела, ищем пересечения между ними, пересечения - это удары.
+</p><p>Итак, что такое «решаем контакты»?
+</p><p>Что такое контакт? Это всего лишь указание, какие фигуры каких
+тел находятся в контакте. Точка, нормаль и расстояние
+взаимопроникновения по контакту определяются каждый раз после
+передвижения тела. Тут же решаем — не разошлись ли тела слишком далеко
+и отбрасываем такие контакты. То есть контакты отбрасываются не сразу
+после того, как тела начали по ним разлетаться! Ни-ни! Иначе у нас
+объем вычислений просто чудовищным станет (в части поиска пересечений
+разумеется).
+</p><p>Откуда берутся контакты? Ими становятся удары, уже после
+применения удара (то есть после применения к телам импульса удара).
+Если между фигурами есть контакт, то пересечения их нам искать не нужно
+— удара по ним никогда не будет.
+</p><p>Вводим эмпирически некую минимальную скорость разлета тел,
+которая зависит от величины их взаимопроникновения (это и есть MIN_V).
+</p><p>Теперь нам надо «ударять» тела по контактам, пока удары все еще будут происходить (импульсы будут положительны).
+</p><p>О трении особый разговор. Вкратце, трение уменьшает
+относительную скорость точек тел по перпендикуляру нормали контакта. Но
+здесь есть очень много нюансов, поэтому не буду вообще ничего писать —
+ищите материал сами.
+</p><p>Вот, собственно, и все.
+</p><p>Для замечаний и отзывов — <script language="javascript">print_email_ns("1234grigorenko@mail.runame", "123grigorenko@mail.rucom");</script><a href="mailto:grigorenko@mail.ru" title="Защищён от спам-роботов">grigorenko@mail.ru</a> или здесь, где обсуждается демка:
+<br><a href="http://www.gamedev.ru/forum/?group=2&amp;topic=855">http://www.gamedev.ru/forum/?group=2&amp;topic=855</a></p><p class="non">Страницы: <i><b><a href="http://www.gamedev.ru/articles/?id=70124">1</a> <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">2</a> 3 </b></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p></td></tr><tr><td><p class="non"><a href="http://www.gamedev.ru/forum/?group=2&amp;topic=855">Комментарии: -1</a><br><a href="http://www.gamedev.ru/articles/print.shtml?id=70124">Версия для печати</a></p><p><b class="title">Статьи по теме на GameDev.ru:</b><br>1. <b><a href="http://www.gamedev.ru/articles/?id=70126">Rag doll.</a></b><br>2. <b><a href="http://www.gamedev.ru/articles/?id=70125">Введение в физическую библиотеку Tokamak</a></b><br>3. <b><a href="http://www.gamedev.ru/articles/?id=70108">Физика автомобиля для игр.</a></b><br>
+
+<!-- Ниже - только жопа -->
+</p></td></tr></tbody></table>
+</td>
+</tr></tbody></table></td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p align="center">
+<a href="http://www.gamedev.ru/users/enter.php">Войти в систему</a> | <a href="http://www.gamedev.ru/project/">О сайте</a>
+| <a href="http://www.gamedev.ru/articles/authors.shtml">Авторам</a>
+| <a href="http://www.gamedev.ru/site/forum/">Обсудить</a>
+</p></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td>
+<p align="center"><br>©2001—2008 «GameDev.ru»
+<br><!--Rating@Mail.ru COUNTER--><script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script><script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=261892"'+
+' target=_top><img src="http://top.list.ru/counter'+
+'?id=261892;t=84;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=18 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=261892" target="_top"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru3_files/counter.gif" alt="Рейтинг@Mail.ru" border="0" height="18" width="88"></a><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=261892"><img
+src="http://top.list.ru/counter?js=na;id=261892;t=84"
+border=0 height=18 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->
+
+</p></td></tr></tbody></table>
+<!-- Это конец! --></body></html>

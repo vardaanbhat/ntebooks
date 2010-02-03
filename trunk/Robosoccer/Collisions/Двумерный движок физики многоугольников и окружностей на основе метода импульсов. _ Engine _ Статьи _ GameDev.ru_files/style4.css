@@ -1,0 +1,55 @@
+body {background: #f6f9ff; margin: 0em;}
+td {color: #000028; font-family: Verdana, Arial, sans-serif; font-size: 12px; text-align: justify;}
+textarea{color: #000000; font-family: Verdana, Arial, sans-serif; font-size: 12px; width: 100%; background: #ffffff;}
+input{color: #000000; font-family: Verdana, Arial, sans-serif; font-size: 12px; background: #ffffff; }
+td.fon {background: #ffffff;}
+
+a:link    {color: #2E2E5C;}
+a:visited {color: #318Dc4;}
+a:active  {color: #00304b;}
+a:hover   {color: #bf3a00;}
+
+td.menu {background: #a6bfdc; font-weight: bold; font-size: 12px;}
+td.menu a:link    {color: #00002a; text-decoration: none}
+td.menu a:visited {color: #00002a; text-decoration: none}
+td.menu a:active  {color: #00002a; text-decoration: none}
+td.menu a:hover   {color: #ffffff; text-decoration: none}
+
+td.title {color:#00304b; background: #aecccc; font-size: 17px; text-align: left;}
+b.title {color: #00304b; font-size: 21px;}
+b.title2 {color: #00304b; font-size: 18px;}
+
+p.mar{text-indent: 2em;}
+i.q {color: #808080;}
+
+b {color: #000000;}
+
+h1 {color: #00304b; font-size: 21px; margin: 0;}
+h2 {color: #00304b; font-size: 18px; margin: 0;}
+
+tt{color: #000000;}
+
+td.code {background: #cDd5df;}
+td.co   {background: #d5e0e0;}
+td.cor   {background: #e5d0d0;}
+pre     {color: #000000; font-size: 14px; font-family: 'courier new',courier, sans-serif; text-align: left}
+div.code{background: #e8e8e8; }
+pre b   {color: #0054cf; font-weight: normal;}
+pre b.c {color: #889988; font-weight: normal;}
+
+div.fl {font-size: 11px; text-indent: 1em;}
+
+.thinbut{BORDER: #c5d5f0 1px solid;	FONT-SIZE: 11px; FONT-STYLE: normal;}
+table.r {BORDER: #c5d5f0 1px solid}
+table.c {BORDER: #c5d5f0 1px solid}
+table.c td{BORDER: #c5d5f0 1px solid;}
+
+img.tex {VERTICAL-ALIGN: middle}
+
+form {margin: 0;}
+
+td.seo {color: #808080; font-size: 10px;}
+td.seo a:link    {color: #808080; text-decoration: none}
+td.seo a:visited    {color: #808080; text-decoration: none}
+td.seo a:active    {color: #808080; text-decoration: none}
+td.seo a:hover    {color: #808080; text-decoration: none}
