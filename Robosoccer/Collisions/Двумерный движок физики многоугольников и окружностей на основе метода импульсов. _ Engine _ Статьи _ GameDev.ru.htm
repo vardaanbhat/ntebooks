@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><!-- GameDev.ru / Статьи / Engine / Двумерный движок физики многоугольников и окружностей на основе метода импульсов. --><title>Двумерный движок физики многоугольников и окружностей на основе метода импульсов. / Engine / Статьи / GameDev.ru</title>
+
+
+
+ 
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ <meta http-equiv="Content-Language" content="ru">
+ <meta name="Description" content="Двумерный движок физики многоугольников и окружностей на основе метода импульсов.">
+ <meta name="keywords" content="Двумерный, движок, физики, многоугольников, окружностей, на, основе, метода, импульсов">
+ <link href="http://www.gamedev.ru/favicon.ico" rel="SHORTCUT ICON"> 
+ <link href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru_files/style4.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru_files/common.js"></script>
+<link rel="stylesheet" type="text/css" href="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru_files/article.css"></head><body>
+
+<!-- User Panel -->
+<form action="/users/logon.php" method="post" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left"><b>GameDev.ru — Разработка игр.</b>
+</p></td>
+<td class="code">
+<p class="non" align="center"><a href="http://www.gamedev.ru/project/">В первый раз на сайте?</a>
+</p></td>
+<td class="code">
+<p class="non" align="right">
+<input name="action" value="logon" type="hidden">
+<a href="http://www.gamedev.ru/users/regist.php" title="Зарегистрироваться">Логин</a>:<input class="thinbut" name="Nick" value="" size="10">
+<a href="http://www.gamedev.ru/users/passrem.php" title="Напоминание пароля">Пароль</a>:<input class="thinbut" name="Password" value="" size="10" type="password">
+<input class="thinbut" value="Войти" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+<table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td>
+<p class="non" style="font-family: impact,sans-serif; font-size: 46px; font-weight: bold;">
+<i><a style="text-decoration: none;" href="http://www.gamedev.ru/">GameDev.ru </a></i>
+</p></td>
+<td><p class="non" align="right">
+</p></td>
+</tr></tbody></table>
+
+<!-- Path -->
+<form method="get" action="http://www.google.com/search" onsubmit="return check_submit(this)">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p class="non" align="left">
+/ <a href="http://www.gamedev.ru/" title="GameDev.ru - Разработка игр">GameDev</a> / <a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a> / <a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a> / <b>Двумерный движок физики многоугольников и окружностей на …</b></p></td>
+<td class="code"><p align="right">
+Поиск:<input name="ie" value="windows-1251" type="hidden"><input name="oe" value="windows-1251" type="hidden"><input name="domains" value="www.gamedev.ru" type="hidden"><input class="thinbut" name="q" size="10" maxlength="255" value="" type="text"><input name="sitesearch" value="www.gamedev.ru" checked="checked" type="hidden">
+<input class="thinbut" name="btnG" value="Найти!" type="submit">
+</p></td>
+</tr></tbody></table>
+</form>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td>
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+<tbody><tr><td valign="top" width="110">
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+
+
+<!-- Menu -->
+<tbody><tr><td>
+<table class="r" cellpadding="1" cellspacing="1" width="100%">
+<tbody><tr><td class="menu"><a href="http://www.gamedev.ru/news/" title="Новости">Новости</a></td></tr><tr><td class="code"><b><a href="http://www.gamedev.ru/articles/" title="Статьи">Статьи</a></b></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/authors.shtml" title="Авторам">Авторам</a></p></td></tr><tr><td class="code"><p class="non">| <a href="" title=""></a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=1" title="Direct3D">Direct3D</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=2" title="OpenGL">OpenGL</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=3" title="Графика">Графика</a></p></td></tr><tr><td class="co"><p class="non">&gt; <b><a href="http://www.gamedev.ru/articles/?sect=7" title="Engine">Engine</a></b></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=4" title="Экспорт">Экспорт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=8" title="Сети">Сети</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=10" title="Звук">Звук</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=11" title="DelphiX">DelphiX</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=5" title="Game Design">Game Design</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=6" title="Арт">Арт</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=9" title="Интервью">Интервью</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=12" title="События">События</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=13" title="Работа">Работа</a></p></td></tr><tr><td class="code"><p class="non">| <a href="http://www.gamedev.ru/articles/?sect=14" title="Юмор">Юмор</a></p></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/tip/" title="Подсказки">Подсказки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/terms/" title="Термины">Термины</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/faq/" title="FAQ">FAQ</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/forum/" title="Форум">Форум</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/community/" title="Сообщества">Сообщества</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/links/" title="Ссылки">Ссылки</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/books/" title="Книги">Книги</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/job/forum/" title="Работа">Работа</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/proj/" title="Проекты">Проекты</a></td></tr><tr><td class="menu"><a href="http://www.gamedev.ru/users/" title="Пользователи">Пользователи</a></td></tr></tbody></table></td></tr><tr><td><br><table class="r" cellpadding="3" cellspacing="1" width="100%"><tbody><tr><td class="menu">
+<p class="non">Рекомендуем
+</p></td></tr><tr><td class="code">
+<p class="non" align="center"><noindex><a href="http://www.ozon.ru/context/soft_detail/id/1686629/?partner=game"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru_files/1000120363.gif" alt="Периметр: Геометрия войны" border="0" width="60"></a></noindex><br>
+<noindex><a href="http://www.ozon.ru/context/soft_detail/id/1686629/?partner=game">Заказать</a></noindex><br>
+</p></td></tr></tbody></table></td></tr></tbody></table>
+</td>
+<td class="fon" valign="top">
+<table border="0" cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td>
+<!-- Господь! Ты видишь это тело! -->
+
+</td></tr><tr><td class="title"><h1>Двумерный движок физики многоугольников и окружностей на основе метода импульсов.</h1></td></tr><tr><td>
+<p class="non">Страницы: <i><b>1 <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">2</a> <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">3</a> </b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">Следующая страница</a></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p><p>
+<table align="right" border="0" cellpadding="10" cellspacing="0" width="200"><tbody><tr><td>
+<p class="non" align="right">
+
+</p><p class="non">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td class="title">
+<table border="0" cellpadding="10" cellspacing="1" width="100%"><tbody><tr><td class="fon">
+
+<b>
+</b><p class="non" align="right"><b>Введение</b></p><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">Часть 2. Разбиение пространства, пересечение фигур</a></b></p><p class="non" align="right"><b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">Часть 5. Удары и импульсы</a></b></p></td></tr></tbody></table></td></tr></tbody></table>
+</p></td></tr></tbody></table>
+	</p><p align="left"><b class="title">Введение</b></p><p>Здесь не будет полного описания движка, а скорее некий набор советов и т.д., полученных в процессе его написания.
+</p><p>В качестве языка программирования используется C++. Для тех, кто забыл или не знает небольшой справочник:
+<br></p><p class="non" align="left"><b>sqrt()</b> — извлечение квадратного корня;
+<br><b>A /= B</b>&nbsp; — это A = A / B, A += B означает A = A + B и т.д;
+<br><b>fabs()</b> — получить абсолютную величину (то есть для отрицательных чисел вычесть из нуля это число);
+<br><b>PI</b> — число Пи;
+<br><b>double</b> — это основной тип для вещественных чисел;
+<br><b>void f (double&amp; a)</b> — функция f(), не возвращает ничего (void), в нее передается ссылка на a типа double.
+</p><p><b class="title">Часть 1. Основы.</b>
+</p><p>Начнем с азов геометрии (далее все про двумерный случай). Двумерный вектор V — это два вещественных числа: Vx и Vy.
+<br>Записывать будем как (Vx, Vy). Вектор V из точки A в B это (Bx–Ax, By–Ay), то есть Vx = Bx – Ax, Vy = By – Ay. 
+</p><p>Длина вектора V = sqrt(Vx*Vx + Vy * Vy). Это является расстоянием между началом и концом вектора.
+</p><p>Чтобы получить единичный вектор из вектора V, делаем так:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> l = sqrt(Vx * Vx + Vy * Vy)
+<b>if</b> (fabs(l) &lt; _E)
+{
+  Vx /= l;
+  Vy /= l;
+}</pre></td></tr></tbody></table></div>
+<p>_E — это точность вычислений (скажем 1e–12).
+</p><p>Чтобы вектор V направить в обратную сторону:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>  Vx = – Vx; Vy = – Vy;</pre></td></tr></tbody></table></div>
+<p><i>Наша</i> система декартовых координат такова: положительный конец
+оси X направлен вправо, а оси Y – вниз (а не вверх, как обычно!).
+Нетрудно думаю понять, что вращение «по часовой стрелке»&nbsp; (то есть
+от оси X к оси Y кратчайшим образом) в системе с осью Y вверх выглядит
+в нашей системе как вращение «против часовой стрелки». Советую понять
+этот момент, чтобы потом не путаться. </p><p>В нашей системе (далее везде — только о такой системе),
+поворот вектора против часовой стрелке на 90 градусов есть вектор (–Vy,
+Vx). (по часовой — (Vy, –Vx)). Вводим следующие ограничения — все
+многоугольники у нас будут выпуклые (грубо говоря, в них нет
+«впадинок», точно говоря, «все точки отрезка соединяющего любые
+<br>две точки многоугольника принадлежат многоугольнику») и при этом
+вершины многоугольников заданы в порядке обхода многоугольника по
+часовой стрелке. Чтобы получить правильно направленную нормаль стороны
+многоугольника (то есть направленную изнутри многоугольника наружу)
+следует для стороны вычесть из следующей вершины предыдущую (напоминаю
+— вершины заданы для обхода многоугольника по часовой). Полученный
+таким образом вектор стороны поворачиваем против часовой стрелки,
+нормализуем его, то есть, делаем из него единичный. Это и есть нормаль
+стороны.
+</p><p>Введем теперь функцию (DOT2D – это класс двумерной точки,
+который помимо x и y включает указатель next на такую же точку, чтобы
+делать списки):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> orient(DOT2D* a, DOT2D* b, DOT2D* c)
+{
+  <b>return</b> (a-&gt;x - c-&gt;x)*(b-&gt;y - c-&gt;y) - (a-&gt;y - c-&gt;y) * (b-&gt;x - c-&gt;x);
+}</pre></td></tr></tbody></table></div>
+<p>Эта функция возвращает знак полуплоскости точки «c» относительно
+прямой (a, b). Если точка «c» лежит на прямой, то orient() возвращает
+0.
+</p><p>Несмотря на кажущуюся внешнюю простоту, это важнейшая функция,
+которая часто используется в алгоритмах над многоугольниками.
+Предположим нам нужно определить лежит ли точка (x, y) внутри нашего
+многоугольника. Перед этим следует задать некоторую точку, заведомо
+лежащую внутри многоугольника, например, его центр масс. Теперь для
+каждой стороны смотрим, совпадает ли знак полуплоскости искомой точки и
+центра масс. Если хотя бы для одной из стороны не совпадает — точка
+лежит вне многоугольника.
+</p><p>Вернемся к поворотам. Что есть поворот на угол? Представим себе
+единичную окружность с центром в начале координат. Точку окружности,
+пересекаемую положительным концом оси X примем за нулевой угол. Точка,
+пересекаемая положительным концом оси Y — это угол PI / 2. То есть
+поворот на положительные углы в нашей системе координат идут по часовой
+стрелке (в «обычной» декартовой — против). Следующая функция — это
+поворот точки вокруг начала координат на заданный угол по часовой
+стрелке (в радианах):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>void</b> rotate(<b>double</b>&amp; x, <b>double</b>&amp; y, <b>double</b> sinA, <b>double</b> cosA)
+{
+  <b>double</b> xx = x * cosA - y * sinA;
+  y = y * cosA + x * sinA;
+  x = xx;
+}
+
+<b>void</b> rotate(<b>double</b>&amp; x, <b>double</b>&amp; y, <b>double</b> angle)
+{
+  rotate(x, y, sin(angle), cos(angle));
+}</pre></td></tr></tbody></table></div>
+<p>Вопрос на сообразительность: как повернуть не вокруг начала координат, а вокруг произвольной точки?
+</p><p>Ответ для несообразительных: переносим систему координат так,
+чтобы начало координат совпало с произвольной точкой. Поворачиваем.
+Переносим обратно.
+</p><p>Перенос системы координат в некоторую точку (x1, y1) означает,
+что каждая точка (x, y) переходит в (x–x1, y–y1) (нетрудно понять, что
+при этом точка (x1, y1) переходит в (0, 0)).
+</p><p>Еще немного разомнемся с векторами. Предположим, нам нужен
+единичный вектор, повернутый на некоторый угол. Как его получить?
+Возьмем единичный вектор, соответствующий нулевому углу. Это какой
+вектор? Правильно (1, 0) и сделаем rotate(). Что получим? Получим
+полезную функцию, возвращающую то, что нам нужно:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre>DOT2D AngleVector(<b>double</b> angle)
+{
+  <b>return</b> DOT2D(cos(angle), sin(angle));
+}</pre></td></tr></tbody></table></div>
+<p>Обратная функция (для единичного вектора!, PIPI = PI + PI):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> AngleOfVector(DOT2D V)
+{
+  <b>double</b> a = acos(V.x);
+  <b>if</b> (V.y &lt; 0) a = PIPI - a;
+  <b>return</b> a;
+}</pre></td></tr></tbody></table></div>
+<p>Ну, и до кучи без комментариев набор полезных функций:
+</p><p>Площадь многоугольника (POLY2D: n — количество вершин, first — указатель на первую вершину в списке):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> POLY2D::Square()
+{
+  <b>double</b> S = 0.0;
+  <b>if</b> (n &lt; 3) <b>return</b> 0.0;
+  DOT2D *v = first;
+  <b>for</b> (<b>int</b> i=0;i&lt;n;i++)
+  {
+    DOT2D *nv = v-&gt;next;
+    <b>if</b> (nv == 0) nv = first;
+    S = S + v-&gt;x * nv-&gt;y - nv-&gt;x * v-&gt;y;
+    v = nv;
+  }
+  <b>return</b> fabs(S) * 0.5;
+}</pre></td></tr></tbody></table></div>
+<p>Расстояние от точки «c» до прямой (a, b) (всегда положительное, если убрать fabs(), то знак будет задавать полуплоскость):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> distance(DOT2D* a, DOT2D* b, DOT2D* c)
+{
+  <b>double</b> dx = a-&gt;x - b-&gt;x;
+  <b>double</b> dy = a-&gt;y - b-&gt;y;
+  <b>double</b> D = dx * (c-&gt;y - a-&gt;y) - dy * (c-&gt;x - a-&gt;x);
+  <b>return</b> fabs(D / sqrt(dx * dx + dy * dy));
+}</pre></td></tr></tbody></table></div>
+<p>Пересекает ли окружность радиуса R с центром в (x, y) отрезок (A,B), длина которого есть L:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>bool</b> CircleIntersects(<b>double</b> x, <b>double</b> y, <b>double</b> R, <b>double</b> L, DOT2D* A, DOT2D* B, DOT2D* Z)
+{
+<b class="c">// единичный вектор отрезка AB</b>
+  <b>double</b> Xv = (B-&gt;x - A-&gt;x) / L;
+  <b>double</b> Yv = (B-&gt;y - A-&gt;y) / L;
+  <b>double</b> Xd = (A-&gt;x - x);
+  <b>double</b> Yd = (A-&gt;y - y);
+  <b>double</b> b = 2 * (Xd * Xv + Yd * Yv);
+  <b>double</b> c = Xd * Xd + Yd * Yd - R * R;
+  <b>double</b> c4 = c + c; c4 += c4;
+  <b>double</b> D = b * b - c4;
+  <b>if</b> (D &lt; 0) <b>return</b> <b>false</b>; <b class="c">// нет корней, нет пересечений</b>
+
+  D = sqrt(D);
+  <b>double</b> l1 = ( - b + D) * 0.5;
+  <b>double</b> l2 = ( - b - D) * 0.5;
+  <b>bool</b> intersects1 = ((l1 &gt;= 0.0) &amp;&amp; (l1 &lt;= L));
+  <b>bool</b> intersects2 = ((l2 &gt;= 0.0) &amp;&amp; (l2 &lt;= L));
+  <b>bool</b> intersects = intersects1 || intersects2;
+  <b>if</b> (intersects &amp;&amp; Z)
+  {
+    <b>if</b> (intersects1 &amp;&amp; intersects2) 
+    {
+      l1 = (l1 + l2) * 0.5;
+      Z-&gt;x = A-&gt;x + Xv * l1;
+      Z-&gt;y = A-&gt;y + Yv * l1;
+    }
+    <b>else</b> <b>if</b> (intersects1)
+    {
+      Z-&gt;x = A-&gt;x + Xv * l1;
+      Z-&gt;y = A-&gt;y + Yv * l1;
+    }
+    <b>else</b> 
+    {
+      Z-&gt;x = A-&gt;x + Xv * l2;
+      Z-&gt;y = A-&gt;y + Yv * l2;
+    }
+  }
+  <b>return</b> intersects;
+}</pre></td></tr></tbody></table></div>
+<p>Пересечение прямых:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>double</b> D2(<b>double</b> a11, <b>double</b> a12, <b>double</b> a21, <b>double</b> a22)
+{
+  <b>return</b> a11 * a22 - a12 * a21;
+}
+
+<b>bool</b> IntersectLines(DOT2D* a1, DOT2D* a2, DOT2D* b1, DOT2D* b2,DOT2D* c)
+{
+  <b>double</b> ady = a1-&gt;y - a2-&gt;y;
+  <b>double</b> adx = a2-&gt;x - a1-&gt;x;
+  <b>double</b> bdy = b1-&gt;y - b2-&gt;y;
+  <b>double</b> bdx = b2-&gt;x - b1-&gt;x;
+<b class="c">// определитель системы</b>
+  <b>double</b> D = D2(ady, adx, bdy, bdx);
+  <b>if</b> (fabs(D) &lt; _E) <b>return</b> <b>true</b>; <b class="c">// нет решения</b>
+  <b>double</b> aC = adx * a1-&gt;y + ady * a1-&gt;x;
+  <b>double</b> bC = bdx * b1-&gt;y + bdy * b1-&gt;x;
+  <b>double</b> DX = D2(aC, adx, bC, bdx);
+  <b>double</b> DY = D2(ady, aC, bdy, bC);
+  c-&gt;x = DX / D;
+  c-&gt;y = DY / D;
+  <b>return</b> <b>false</b>;
+}</pre></td></tr></tbody></table></div>
+<p>Проверка — ориентирован ли наш многоугольник как нужно (то есть, обходятся ли его вершины по часовой стрелке)?:
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>bool</b> POLY2D::OrientedClockWise()
+{
+  <b>if</b> (n &lt; 3) <b>return</b> <b>false</b>;
+  DOT2D* a = first;
+  DOT2D* b = first-&gt;next;
+  <b>return</b> orient(a, b, b-&gt;next) &gt; 0.0;
+}</pre></td></tr></tbody></table></div>
+<p>Повернуть односвязный список (привожу до кучи, задача из области программирования):
+<br></p><div class="code"><table cellpadding="5" cellspacing="2" width="100%"><tbody><tr><td><pre><b>void</b> POLY2D::revert_points()
+{
+  <b>if</b> (n == 0) <b>return</b>;
+  DOT2D* dot = first;
+  DOT2D* last = 0;
+  <b>while</b> (dot)
+  {
+<b class="c">// запоминаем следующую точку</b>
+    DOT2D* next_dot = dot-&gt;next;
+<b class="c">// ставим точку перед предыдущей</b>
+    dot-&gt;next = last;
+    last = dot;
+    dot = next_dot;
+  }
+  dot = first;
+  first = last;
+  last = first;
+}</pre></td></tr></tbody></table></div><p class="non">Страницы: <i><b>1 <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">2</a> <a href="http://www.gamedev.ru/articles/?id=70124&amp;page=3">3</a> </b><a href="http://www.gamedev.ru/articles/?id=70124&amp;page=2">Следующая страница</a></i></p></td></tr><tr><td><p class="non" align="right">Автор: <b><a href="http://www.gamedev.ru/users/?id=9938">Григорий Григоренко</a></b></p></td></tr><tr><td><p class="non"><a href="http://www.gamedev.ru/forum/?group=2&amp;topic=855">Комментарии: -1</a><br><a href="http://www.gamedev.ru/articles/print.shtml?id=70124">Версия для печати</a></p><p><b class="title">Статьи по теме на GameDev.ru:</b><br>1. <b><a href="http://www.gamedev.ru/articles/?id=70126">Rag doll.</a></b><br>2. <b><a href="http://www.gamedev.ru/articles/?id=70125">Введение в физическую библиотеку Tokamak</a></b><br>3. <b><a href="http://www.gamedev.ru/articles/?id=70108">Физика автомобиля для игр.</a></b><br>
+
+<!-- Ниже - только жопа -->
+</p></td></tr></tbody></table>
+</td>
+</tr></tbody></table></td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td class="code">
+<p align="center">
+<a href="http://www.gamedev.ru/users/enter.php">Войти в систему</a> | <a href="http://www.gamedev.ru/project/">О сайте</a>
+| <a href="http://www.gamedev.ru/articles/authors.shtml">Авторам</a>
+| <a href="http://www.gamedev.ru/site/forum/">Обсудить</a>
+</p></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td>
+<p align="center"><br>©2001—2008 «GameDev.ru»
+<br><!--Rating@Mail.ru COUNTER--><script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script><script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=261892"'+
+' target=_top><img src="http://top.list.ru/counter'+
+'?id=261892;t=84;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=18 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=261892" target="_top"><img src="%C4%E2%F3%EC%E5%F0%ED%FB%E9%20%E4%E2%E8%E6%EE%EA%20%F4%E8%E7%E8%EA%E8%20%EC%ED%EE%E3%EE%F3%E3%EE%EB%FC%ED%E8%EA%EE%E2%20%E8%20%EE%EA%F0%F3%E6%ED%EE%F1%F2%E5%E9%20%ED%E0%20%EE%F1%ED%EE%E2%E5%20%EC%E5%F2%EE%E4%E0%20%E8%EC%EF%F3%EB%FC%F1%EE%E2.%20_%20Engine%20_%20%D1%F2%E0%F2%FC%E8%20_%20GameDev.ru_files/counter.gif" alt="Рейтинг@Mail.ru" border="0" height="18" width="88"></a><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=261892"><img
+src="http://top.list.ru/counter?js=na;id=261892;t=84"
+border=0 height=18 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->
+
+</p></td></tr></tbody></table>
+<!-- Это конец! --></body></html>
